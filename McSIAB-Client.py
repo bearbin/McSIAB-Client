@@ -49,7 +49,7 @@ def auth():
 	print
 	keyid = raw_input("Please enter your key id: ")
 	keypass = raw_input("Please enter your password: ")
-	authhandle = urllib.urlopen(server_url+"/keyverify.php?keyid="+str(keyid)+"&keypass="+str(keypass))
+	authhandle = urllib.urlopen("http://berboe.co.uk/keyverify.php?keyid="+str(keyid)+"&keypass="+str(keypass))
 	i = authhandle.readline()
 	if i == "correct password":
 		print "Correct ID/Pass Combination"
