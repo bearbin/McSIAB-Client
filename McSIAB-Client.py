@@ -4,6 +4,7 @@ import os
 import urllib
 
 server_url = "http://www.berboe.co.uk"
+authserver = "http://www.berboe.co.uk"
 
 def main():
 	print "Welcome to McSIAB, the Alleyns Minecraft Server In A Box app."
@@ -15,13 +16,13 @@ def main():
 def main_menu():
 	while 1 == 1:
 		print
-		print "(1) Load Server List"
+		print "(1) Choose a Server to Use"
 		print "(2) Load Test Page"
 		print "(3) Exit"
 		print "(4) Test Auth"
 		option = raw_input("Choose an option: ")
 		if option == "1":
-			server_list()
+			server_choice()
 		elif option == "2":
 			test_page()
 		elif option == "3":
@@ -31,11 +32,24 @@ def main_menu():
 		else:
 			print "Invalid option chosen. Please try again"
 
-def server_list():
+def server_choice():
 	print "Not implemented. Coming Soon."
 	print
 	return
-
+	aberberb = []
+	keyid = raw_input("Please enter your key id: ")
+	keypass = raw_input("Please enter your password: ")
+	listhandle = urllib.urlopen(server_url+"/server-list.php?keyid="+str(keyid)+"&keypass="+str(keypass))
+	listread = listhandle.readline()
+	if listread = "incorrect password":
+		print "Incorrect Password. Please try again."
+	else:
+		print listread
+		for i in listhandle.readlines():
+			aberberb.append(i)
+		for p in len(aberberb)
+			print "("+p+") "+aberberb[p]
+			
 def test_page():
 	filehandle = urllib.urlopen(server_url+"/bottombar.php")
 	int1 = 0
@@ -49,7 +63,7 @@ def auth():
 	print
 	keyid = raw_input("Please enter your key id: ")
 	keypass = raw_input("Please enter your password: ")
-	authhandle = urllib.urlopen("http://berboe.co.uk/keyverify.php?keyid="+str(keyid)+"&keypass="+str(keypass))
+	authhandle = urllib.urlopen(authserver+"/keyverify.php?keyid="+str(keyid)+"&keypass="+str(keypass))
 	i = authhandle.readline()
 	if i == "correct password":
 		print "Correct ID/Pass Combination"
