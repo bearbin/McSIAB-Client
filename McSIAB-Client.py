@@ -7,7 +7,7 @@ server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
 
 def main():
-	print "Welcome to McSIAB, the Alleyns Minecraft Server In A Box app."
+	print "Welcome to McSIAB, the Minecraft Server In A Box app."
 	print "Java is required to run the servers produced by this application. Errors may appear if it is not installed"
 	raw_input("Press enter to continue")
 	main_menu()
