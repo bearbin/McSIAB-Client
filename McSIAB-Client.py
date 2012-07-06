@@ -3,7 +3,7 @@
 import os
 import urllib
 
-server_url = "http://www.berboe.co.uk"
+server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
 
 def main():
@@ -35,20 +35,10 @@ def main_menu():
 def server_choice():
 	print "Not implemented. Coming Soon."
 	print
-	return
-	aberberb = []
+	return 1
 	keyid = raw_input("Please enter your key id: ")
 	keypass = raw_input("Please enter your password: ")
-	listhandle = urllib.urlopen(server_url+"/server-list.php?keyid="+str(keyid)+"&keypass="+str(keypass))
-	listread = listhandle.readline()
-	if listread = "incorrect password":
-		print "Incorrect Password. Please try again."
-	else:
-		print listread
-		for i in listhandle.readlines():
-			aberberb.append(i)
-		for p in len(aberberb)
-			print "("+p+") "+aberberb[p]
+	
 			
 def test_page():
 	filehandle = urllib.urlopen(server_url+"/bottombar.php")
