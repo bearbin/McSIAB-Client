@@ -79,11 +79,14 @@ def auth():
 def install_yaml():
 	yaml_zip_url = urllib.urlopen("http://pyyaml.org/download/pyyaml/PyYAML-3.10.zip")
 	localFile = open("PyYAML.zip", "wb")
+	print "Downloading ZipFile"
 	while 1:
 		packet = yaml_zip_url.read()
+		print "Downloading..."
 		if not packet:
 			break
 		localFile.write(packet)
+	print "Downloaded."
 	localFile.close()
 	yaml_zip_url.close()
 
