@@ -93,5 +93,9 @@ def install_yaml():
 	yamlzip = zipfile.ZipFile("PyYAML.zip")
 	print "Extracting PyYAML.zip"
 	yamlzip.extractall()
+	print "Installing"
+	os.system("cd PyYAML-3.10 && python setup.py --without-libyaml install")
+	print "Installed"
+	return
 
 main()
