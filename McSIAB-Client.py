@@ -3,7 +3,7 @@
 import os
 import urllib
 import zipfile
-import sys
+from sys import executable
 
 def yaml_check():
 	try:
