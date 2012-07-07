@@ -78,7 +78,7 @@ def test_page():
 def auth():
 	print
 	keyid = raw_input("Please enter your key id: ")
-	keypass = raw_input("Please enter your password: ")
+	keypass = getpass("Please enter your password: ")
 	authhandle = urllib.urlopen(authserver+"/keyverify.php?keyid="+str(keyid)+"&keypass="+str(keypass))
 	i = authhandle.readline()
 	if i == "correct password":
