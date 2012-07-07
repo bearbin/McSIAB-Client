@@ -3,12 +3,26 @@
 import os
 import urllib
 
+def yaml_check():
+	try:
+		import yaml
+	except:
+		print "PyYAML not installed. This is required to run McSIAB. Do you wish to install?"
+		option = raw_input("y/n: ")
+		if option == "y":
+			install_yaml()
+		else:
+			print "Exiting"
+			exit()
+	return	
+
 server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
 
 def main():
 	print "Welcome to McSIAB, the Minecraft Server In A Box app."
 	print "Java is required to run the servers produced by this application. Errors may appear if it is not installed"
+	yaml_check()
 	raw_input("Press enter to continue")
 	main_menu()
 	print
@@ -39,7 +53,6 @@ def server_choice():
 	return 1
 	keyid = raw_input("Please enter your key id: ")
 	keypass = raw_input("Please enter your password: ")
-	
 			
 def test_page():
 	filehandle = urllib.urlopen(server_url+"/bottombar.php")
@@ -62,5 +75,16 @@ def auth():
 	else:
 		print "Something went wrong :("
 		return -1;
+
+def install_yaml():
+	yaml_zip_url = urllib.urlopen("http://pyyaml.org/download/pyyaml/PyYAML-3.10.zip")
+	localFile = open("PyYAML.zip", "wb")
+	while 1:
+		packet = yaml_zip_url.read()
+		if not packet:
+			break
+		localFile.write(packet)
+	localFile.close()
+	yaml_zip_url.close()
 
 main()
