@@ -100,6 +100,7 @@ def install_yaml():
 	print "Deleting Directories"
 	nukedir("PyYAML-3.10")
 	print "Deleting ZipFile"
+	yamlzip.close()
 	os.remove("PyYAML.zip")
 	print "Cleaned Up!"
 	import yaml
