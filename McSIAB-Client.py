@@ -53,8 +53,18 @@ def server_choice():
 	print "Not implemented. Coming Soon."
 	print
 	return 1
-	keyid = raw_input("Please enter your key id: ")
-	keypass = raw_input("Please enter your password: ")
+	listYAMLserver = urllib.urlopen(server_url+"/serverzips/list.yml")
+	localFile = open("list.yml", "r+")
+	while 1:
+		packet = listYAMLserver.readline()
+		if not packet:
+			break
+		localFile.write(packet)
+	listYAMLserver.close()
+	yamlFileForParsing = yaml.open(localFile)
+	print yamlFileForParsing
+	localFile.close()
+	os.remove("list.yml")
 			
 def test_page():
 	filehandle = urllib.urlopen(server_url+"/bottombar.php")
