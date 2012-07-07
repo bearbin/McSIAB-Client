@@ -2,6 +2,7 @@
 
 import os
 import urllib
+import zipfile
 
 def yaml_check():
 	try:
@@ -89,5 +90,8 @@ def install_yaml():
 	print "Downloaded."
 	localFile.close()
 	yaml_zip_url.close()
+	yamlzip = zipfile.ZipFile("PyYAML.zip")
+	print "Extracting PyYAML.zip"
+	yamlzip.extractall()
 
 main()
