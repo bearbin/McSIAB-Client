@@ -11,3 +11,4 @@ Running
 -------
 
 To run this, simply type "python McSIAB-Client.py" into the terminal. If you are on linux and have not installed PyYAML yet, you will need to prefix the command with sudo so the installation can complete succesfully.
+This is compatible only with python 2 for now, I am working on a python 3 version soon though.
