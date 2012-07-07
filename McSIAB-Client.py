@@ -3,10 +3,11 @@
 import os
 import urllib
 import zipfile
+import sys
 
 def yaml_check():
 	try:
-		import yaml		
+		import yaml	
 	except:
 		print "PyYAML not installed. This is required to run McSIAB. Do you wish to install?"
 		option = raw_input("y/n: ")
@@ -94,7 +95,7 @@ def install_yaml():
 	print "Extracting PyYAML.zip"
 	yamlzip.extractall()
 	print "Installing"
-	os.system("cd PyYAML-3.10 && python setup.py --without-libyaml install")
+	os.system("cd PyYAML-3.10 && "+sys.executable+" setup.py --without-libyaml install")
 	print "Installed"
 	print "Cleaning Up"
 	print "Deleting Directories"
