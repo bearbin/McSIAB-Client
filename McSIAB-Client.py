@@ -4,10 +4,12 @@ import os
 import urllib
 import zipfile
 from sys import executable
+import yaml
 
 def yaml_check():
 	try:
-		import yaml	
+		import yaml
+		print "PyYAML Installed. Continuing"	
 	except:
 		print "PyYAML not installed. This is required to run McSIAB. Do you wish to install?"
 		option = raw_input("y/n: ")
@@ -25,7 +27,6 @@ def main():
 	print "Welcome to McSIAB, the Minecraft Server In A Box app."
 	print "Java is required to run the servers produced by this application. Errors may appear if it is not installed"
 	yaml_check()
-	raw_input("Press enter to continue")
 	main_menu()
 	print
 	print "Exiting"
@@ -52,19 +53,10 @@ def main_menu():
 def server_choice():
 	print "Not implemented. Coming Soon."
 	print
-	return 1
 	listYAMLserver = urllib.urlopen(server_url+"/serverzips/list.yml")
-	localFile = open("list.yml", "r+")
-	while 1:
-		packet = listYAMLserver.readline()
-		if not packet:
-			break
-		localFile.write(packet)
-	listYAMLserver.close()
-	yamlFileForParsing = yaml.open(localFile)
+	yamlFileForParsing = yaml.open(listYAMLserver)
 	print yamlFileForParsing
-	localFile.close()
-	os.remove("list.yml")
+	listYAMLserver.close()
 			
 def test_page():
 	filehandle = urllib.urlopen(server_url+"/bottombar.php")
