@@ -54,8 +54,8 @@ def server_choice():
 	print "Not implemented. Coming Soon."
 	print
 	listYAMLserver = urllib.urlopen(server_url+"/serverzips/list.yml")
-	yamlFileForParsing = yaml.open(listYAMLserver)
-	print yamlFileForParsing
+	FileForParsing = yaml.load(listYAMLserver)
+	print FileForParsing
 	listYAMLserver.close()
 			
 def test_page():
