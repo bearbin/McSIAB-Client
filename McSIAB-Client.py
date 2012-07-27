@@ -6,33 +6,12 @@ import zipfile
 from sys import executable
 import yaml
 
-def yaml_check():
-	try:
-		import yaml	
-	except:
-		print "PyYAML not installed. This is required to run McSIAB. Do you wish to install?"
-		option = raw_input("y/n: ")
-		if option == "y" and os.geteuid() == 0:
-			install_yaml()
-			print "Exiting."
-			exit()
-		elif os.geteuid() != 0:
-			print "Root required to install PyYAML, prefix command with sudo or run as root."
-			print "Exiting"
-			exit()
-		else:
-			print "Exiting"
-			exit()
-	return	
-
 server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
 
 def main():
 	print "Welcome to McSIAB, the Minecraft Server In A Box app."
-	print "Checking if PyYAML is installed..."
-	yaml_check()
-	print "PyYAML installed, continuing to main menu."
+	print "setup.py must be run before using this program"
 	main_menu()
 	print
 	print "Exiting"
@@ -84,47 +63,6 @@ def auth():
 		return 1
 	else:
 		print "Something went wrong :("
-		return -1;
-
-def install_yaml():
-	yaml_zip_url = urllib.urlopen("http://pyyaml.org/download/pyyaml/PyYAML-3.10.zip")
-	localFile = open("PyYAML.zip", "wb")
-	print "Downloading ZipFile"
-	while 1:
-		packet = yaml_zip_url.read()
-		print "Downloading..."
-		if not packet:
-			break
-		localFile.write(packet)
-	print "Downloaded."
-	localFile.close()
-	yaml_zip_url.close()
-	yamlzip = zipfile.ZipFile("PyYAML.zip")
-	print "Extracting PyYAML.zip"
-	yamlzip.extractall()
-	print "Installing"
-	os.system("cd PyYAML-3.10 && "+sys.executable+" setup.py --without-libyaml install")
-	print "Installed"
-	print "Cleaning Up"
-	print "Deleting Directories"
-	nukedir("PyYAML-3.10")
-	print "Deleting ZipFile"
-	yamlzip.close()
-	os.remove("PyYAML.zip")
-	print "Cleaned Up!"
-	import yaml
-	return
-
-def nukedir(dir):
-    if dir[-1] == os.sep: dir = dir[:-1]
-    files = os.listdir(dir)
-    for file in files:
-        if file == '.' or file == '..': continue
-        path = dir + os.sep + file
-        if os.path.isdir(path):
-            nukedir(path)
-        else:
-            os.unlink(path)
-    os.rmdir(dir)
+		return -1
 
 main()
