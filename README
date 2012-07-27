@@ -3,12 +3,13 @@ The Minecraft Server in a Box project aims to allow you to download a bukkit or 
 Requirements
 ------------
 
-Java JRE 5 or later (JRE 7 preferred)
+The required platform or JRE for the chosen server. 
 Internet Connection
 Write permissions in the current working directory.
 
 Running
 -------
 
-To run this, simply type "python McSIAB-Client.py" into the terminal. If you are on linux and have not installed PyYAML yet, you will need to prefix the command with sudo so the installation can complete succesfully.
+To run McSIAB, first do 'python setup.py' in the terminal. You may need to run this as root if you do not have the required permissions to install python modules. After that has completed, do 'python McSIAB-Client.py'
+
 This is compatible only with python 2 for now, I am working on a python 3 version soon though.
