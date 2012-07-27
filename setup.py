@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 import os
+import urllib
+from sys import executable
 
 def main():
 	print "Root required to run script - make sure to use."
