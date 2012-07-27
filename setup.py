@@ -50,4 +50,4 @@ def nukedir(dir):
             os.unlink(path)
     os.rmdir(dir)
 
-
+main()
