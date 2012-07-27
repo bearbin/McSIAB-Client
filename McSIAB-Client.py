@@ -8,13 +8,18 @@ import yaml
 
 def yaml_check():
 	try:
-		import yaml
-		print "PyYAML Installed. Continuing"	
+		import yaml	
 	except:
 		print "PyYAML not installed. This is required to run McSIAB. Do you wish to install?"
 		option = raw_input("y/n: ")
-		if option == "y":
+		if option == "y" and os.geteuid() == 0:
 			install_yaml()
+			print "Exiting."
+			exit()
+		elif os.geteuid() != 0:
+			print "Root required to install PyYAML, prefix command with sudo or run as root."
+			print "Exiting"
+			exit()
 		else:
 			print "Exiting"
 			exit()
@@ -25,8 +30,9 @@ authserver = "http://www.berboe.co.uk"
 
 def main():
 	print "Welcome to McSIAB, the Minecraft Server In A Box app."
-	print "Java is required to run the servers produced by this application. Errors may appear if it is not installed"
+	print "Checking if PyYAML is installed..."
 	yaml_check()
+	print "PyYAML installed, continuing to main menu."
 	main_menu()
 	print
 	print "Exiting"
