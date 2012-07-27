@@ -2,7 +2,8 @@
 
 import os
 import urllib
-from sys import executable
+import sys
+import zipfile
 
 def main():
 	print "Root required to run script - make sure to use."
