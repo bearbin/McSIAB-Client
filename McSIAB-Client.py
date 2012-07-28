@@ -49,11 +49,23 @@ def server_choice():
 	print "This feature is under development. It does not do its final procedure yet."
 	print
 	serverListObject = fetch_serverlist()
-	for currentServer in serverListObject:
-		serverNumber += 1
-		print "("+str(serverNumber)+"): "+currentServer['name']
-		print currentServer
-	print serverListObject
+	while 1 == 1:
+		for currentServer in serverListObject:
+			serverNumber += 1
+			print "("+str(serverNumber)+"): "+currentServer['name']
+			print currentServer
+		serverOptionToUse = raw_input("Please enter the server you wish to use: ")
+		if serverOptionToUse.__name__ != 'int':
+			print "You must enter an integer."
+			return
+		if serverOptionToUse < len(serverListObject) and serverOptionToUse > -1:
+			print "Information on server: "+str(serverOptionToUse)
+			print "Server Name	: "+serverListObject[serverOptionToUse]['name']
+			print "Server Type	: "+serverListObject[serverOptionToUse]['server-type']
+			print "Requires Java	: "+serverListObject[serverOptionToUse]['requires-java']
+			print "Compatible	: "+"Coming soon!"
+			print "User-Update?	: "+serverListObject[serverOptionToUse]['user-update']
+		print serverListObject
 			
 def test_page():
 	filehandle = urllib.urlopen("http://yaml.org")
