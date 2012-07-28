@@ -5,13 +5,16 @@ import urllib
 import zipfile
 from sys import executable
 import yaml
+import platform
 
 server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
 
 def main():
 	print "Welcome to McSIAB, the Minecraft Server In A Box app."
+	get_system_info()
 	print "setup.py must be run before using this program"
+	raw_input("Press enter to continue: ")
 	main_menu()
 	print
 	print "Exiting"
@@ -73,5 +76,18 @@ def auth():
 	else:
 		print "Something went wrong :("
 		return -1
+
+def get_system_info():
+	global currentos
+	global currentprocessor
+	print "Getting system info:"
+	print "Getting OS..."
+	currentos = platform.system()
+	print "OS is: "+currentos
+	print "Getting processor type..."
+	currentprocessor = platform.machine()
+	print "Processsor type is: "+currentprocessor
+	print "System info collected."
+	return
 
 main()
