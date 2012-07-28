@@ -36,14 +36,14 @@ def main_menu():
 			print "Invalid option chosen. Please try again"
 
 def server_choice():
-	serverNumber = 0
+	serverNumber = -1
 	print "Not implemented. Coming Soon."
 	print
 	listYAMLserver = urllib.urlopen(server_url+"/serverzips/list.yml")
 	FileForParsing = yaml.load(listYAMLserver)
 	for currentServer in FileForParsing:
 		serverNumber += 1
-		print serverNumber
+		print "("+str(serverNumber)+"): "+currentServer['name']
 		print currentServer
 	print FileForParsing
 	listYAMLserver.close()
