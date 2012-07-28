@@ -16,6 +16,12 @@ def main():
 	print
 	print "Exiting"
 
+def fetch_serverlist():
+	yamlFileOnServer = urllib.urlopen(server_url+"/serverzips/list.yml")
+	parsedFile = yaml.load(yamlFileOnServer)
+	yamlFileOnServer.close()
+	return parsedFile
+
 def main_menu():
 	while 1 == 1:
 		print
@@ -37,16 +43,14 @@ def main_menu():
 
 def server_choice():
 	serverNumber = -1
-	print "Not implemented. Coming Soon."
+	print "This feature is under development. It does not do its final procedure yet."
 	print
-	listYAMLserver = urllib.urlopen(server_url+"/serverzips/list.yml")
-	FileForParsing = yaml.load(listYAMLserver)
-	for currentServer in FileForParsing:
+	serverListObject = fetch_serverlist()
+	for currentServer in serverListObject:
 		serverNumber += 1
 		print "("+str(serverNumber)+"): "+currentServer['name']
 		print currentServer
-	print FileForParsing
-	listYAMLserver.close()
+	print serverListObject
 			
 def test_page():
 	filehandle = urllib.urlopen("http://yaml.org")
