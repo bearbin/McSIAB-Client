@@ -55,11 +55,14 @@ def server_choice():
 			print "("+str(serverNumber)+"): "+currentServer['name']
 			print currentServer
 		serverOptionToUse = raw_input("Please enter the server you wish to use: ")
-		if serverOptionToUse.__name__ != 'int':
-			print "You must enter an integer."
-			return
+		try:
+			int(serverOptionToUse)
+		except ValueError:
+			print "Please enter a valid integer. Press enter to try again."
+			raw_input()
+			continue
 		if serverOptionToUse < len(serverListObject) and serverOptionToUse > -1:
-			print "Information on server: "+str(serverOptionToUse)
+			print "Information on server: "+serverOptionToUse
 			print "Server Name	: "+serverListObject[serverOptionToUse]['name']
 			print "Server Type	: "+serverListObject[serverOptionToUse]['server-type']
 			print "Requires Java	: "+serverListObject[serverOptionToUse]['requires-java']
