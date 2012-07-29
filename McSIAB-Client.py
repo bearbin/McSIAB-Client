@@ -18,6 +18,7 @@ def main():
 	main_menu()
 	print
 	print "Exiting"
+	return
 
 def fetch_serverlist():
 	yamlFileOnServer = urllib.urlopen(server_url+"/serverzips/list.yml")
@@ -51,11 +52,11 @@ def main_menu():
 	return
 
 def server_choice():
-	serverNumber = -1
 	print "This feature is under development. It does not do its final procedure yet."
 	print
 	serverListObject = fetch_serverlist()
 	while 1 == 1:
+		serverNumber = 0
 		for currentServer in serverListObject:
 			serverNumber += 1
 			print "("+str(serverNumber)+"): "+currentServer['name']
@@ -66,14 +67,16 @@ def server_choice():
 		except ValueError:
 			raw_input("Please enter a valid integer. Press enter to try again.")
 			continue
-		if serverOptionToUse < len(serverListObject) and serverOptionToUse > -1:
+		adjustedServerOption = int(serverOptionToUse) -1
+		if adjustedServerOption < len(serverListObject) and adjustedServerOption > -1:
+			chosenServerInfo = serverListObject[adjustedServerOption]
 			print "Information on server: "+serverOptionToUse
-			print "Server Name	: "+serverListObject[serverOptionToUse]['name']
-			print "Server Type	: "+serverListObject[serverOptionToUse]['server-type']
-			print "Requires Java	: "+serverListObject[serverOptionToUse]['requires-java']
+			print "Server Name	: "+str(chosenServerInfo['name'])
+			print "Server Type	: "+str(chosenServerInfo['server-type'])
+			print "Requires Java	: "+str(chosenServerInfo['requires-java'])
 			print "Compatible	: "+"Coming soon!"
-			print "User-Update?	: "+serverListObject[serverOptionToUse]['user-update']
-		print serverListObject
+			print "User-Update?	: "+str(chosenServerInfo['user-update'])
+	return
 			
 def test_page():
 	filehandle = urllib.urlopen("http://yaml.org")
