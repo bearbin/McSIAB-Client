@@ -70,17 +70,22 @@ def server_choice():
 		adjustedServerOption = int(serverOptionToUse) -1
 		if adjustedServerOption < len(serverListObject) and adjustedServerOption > -1:
 			chosenServerInfo = serverListObject[adjustedServerOption]
-			if str(chosenServerInfo['os']) != currentos and str(chosenServerInfo['os']) != 'any':
+			if str(chosenServerInfo['os']) not in [currentos, 'any']:
 				print "This server is not compatible with your OS, it requires: "+str(chosenServerInfo['os'])
 				raw_input("Press enter to continue.")
 				continue
-			if str(chosenServerInfo['processortype']) != currentprocessor and str(chosenServerInfo['processortype']) != 'any':
+			if str(chosenServerInfo['processortype']) not in [currentprocessor, 'any']:
 				print "This server is not compatible with your processor, it requires the "+str(chosenServerInfo['processortype'])+" architecture."
 			print "Information on server: "+serverOptionToUse
 			print "Server Name	: "+str(chosenServerInfo['name'])
 			print "Server Type	: "+str(chosenServerInfo['server-type'])
 			print "Requires Java	: "+str(chosenServerInfo['requires-java'])
 			print "User-Update?	: "+str(chosenServerInfo['user-update'])
+			runServerDecision = raw_input("Do you wish to run this server (yes/no): ")
+			if runServerDecision not in ['yes', 'no']:
+				print "Please use a valid yes or no. Please try again."
+				raw_input("Press enter to continue.")
+				continue 
 	return
 			
 def test_page():
