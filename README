@@ -1,2 +1,6 @@
 The Minecraft Server in a Box project aims to allow you to download a bukkit or vanilla minecraft server and configuration, run it, then save it back to the server again - therefore having a portable minecraft server with a single python script.
 
+License
+=======
+
+McSIAB client is uses the MIT license, available in the LICENSE file attached with this program.
