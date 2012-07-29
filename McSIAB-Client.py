@@ -64,8 +64,7 @@ def server_choice():
 		try:
 			int(serverOptionToUse)
 		except ValueError:
-			print "Please enter a valid integer. Press enter to try again."
-			raw_input()
+			raw_input("Please enter a valid integer. Press enter to try again.")
 			continue
 		if serverOptionToUse < len(serverListObject) and serverOptionToUse > -1:
 			print "Information on server: "+serverOptionToUse
