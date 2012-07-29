@@ -33,16 +33,22 @@ def main_menu():
 		print "(3) Exit"
 		print "(4) Test Auth"
 		option = raw_input("Choose an option: ")
+		try:
+			int(option)
+		except ValueError:
+			raw_input("Please use a valid integer. Press enter to try again.")
+			continue
 		if option == "1":
 			server_choice()
 		elif option == "2":
 			test_page()
 		elif option == "3":
-			return
+			break
 		elif option == "4":
 			auth()
 		else:
 			print "Invalid option chosen. Please try again"
+	return
 
 def server_choice():
 	serverNumber = -1
