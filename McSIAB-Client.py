@@ -79,6 +79,7 @@ def server_choice():
 				continue
 			if str(chosenServerInfo['processortype']) not in [currentprocessor, 'any']:
 				print "This server is not compatible with your processor, it requires the "+str(chosenServerInfo['processortype'])+" architecture."
+				continue
 			print "Information on server: "+serverOptionToUse
 			print "Server Name	: "+str(chosenServerInfo['name'])
 			print "Server Type	: "+str(chosenServerInfo['server-type'])
@@ -92,6 +93,9 @@ def server_choice():
 			if runServerDecision == 'yes':
 				print "Running Server."
 				run_server(chosenServerInfo)
+				print "Server running completed."
+				raw_input("Press enter to continue. ")
+				continue
 			else:
 				print "Returning to server list..."
 				continue
