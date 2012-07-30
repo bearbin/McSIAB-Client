@@ -85,7 +85,13 @@ def server_choice():
 			if runServerDecision not in ['yes', 'no']:
 				print "Please use a valid yes or no. Please try again."
 				raw_input("Press enter to continue.")
-				continue 
+				continue
+			if runServerDecision == 'yes':
+				print "Running Server."
+				run_server(chosenServerInfo)
+			else:
+				print "Returning to server list..."
+				continue
 	return
 			
 def test_page():
@@ -122,5 +128,33 @@ def get_system_info():
 	print "Processsor type is: "+currentprocessor
 	print "System info collected."
 	return
+
+def run_server(serverObjectToRun):
+	print "Downloading server zip."
+	download_zip(server_url+"/serverzips/"+serverObjectToRun['zip-name'], serverObjectToRun['zip-name'])
+	print "Extracting server zip."
+	serverZip = zipfile.ZipFile(serverObjectToRun['zip-name'])
+	serverZip.extractall()
+	print "Server zip extracted. Deleting now..."
+	os.remove(serverObjectToRun['zip-name'])
+	print "Server zip deleted. Running server."
+	runCommand = serverObjectToRun['run-command']
+	os.system(runCommand)
+	return
+
+def download_zip(url, saveLocation):
+	print "Zip Download Started."
+	zipToDownload = urllib.urlopen(url)
+	localFile = open(saveLocation, 'wb')
+	print "Downloading..."
+	while 1:
+		packet = zipToDownload.read()
+		print "Downloading..."
+		if not packet:
+			break
+		localFile.write(packet)
+	print str(saveLocation)+" Downloaded."
+	return
+		
 
 main()
