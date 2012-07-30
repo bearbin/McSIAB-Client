@@ -6,6 +6,7 @@ import zipfile
 from sys import executable
 import yaml
 import platform
+import getpass
 
 server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
@@ -112,7 +113,7 @@ def test_page():
 def auth():
 	print
 	keyid = raw_input("Please enter your key id: ")
-	keypass = getpass("Please enter your password: ")
+	keypass = getpass.getpass("Please enter your password: ")
 	authhandle = urllib.urlopen(authserver+"/keyverify.php?keyid="+str(keyid)+"&keypass="+str(keypass))
 	i = authhandle.readline()
 	if i == "correct password":
@@ -152,8 +153,20 @@ def run_server(serverObjectToRun):
 	runCommand = serverObjectToRun['run-command']
 	os.system(runCommand)
 	print "Server running completed. Cleaning up."
-	nukedir(serverObjectToRun['zip-name'].strip('.zip'))
-	print "Cleaned up."
+	while 1:
+		userChoiceServerCleanup = raw_input("Do you want to clean up (yes/no): ")
+		if userChoiceServerCleanup not in ['yes', 'no']:
+			print "You must use a valid yes/no. Please try again."
+			raw_input("Press enter to continue.")
+			continue
+		elif userChoiceServerCleanup == 'yes':
+			print "Deleting server data..."
+			nukedir(serverObjectToRun['zip-name'].strip('.zip'))
+			print "Cleaned up."
+			break
+		else:
+			print "Server data not deleted. Returning to server list."
+			break
 	return
 
 def download_zip(url, saveLocation):
