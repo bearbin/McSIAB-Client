@@ -1,7 +1,21 @@
-The Alleyns Minecraft Server in a Box project aims to allow you to download a bukkit server and configuration, run it, then save it back to the server again - therefore having a portable minecraft server with a single python script.
+The Minecraft Server in a Box project aims to allow you to download a bukkit or vanilla minecraft server and configuration, run it, then save it back to the server again - therefore having a portable minecraft server with a single python script.
 
+
+Requirements
+------------
+
+The required platform or JRE for the chosen server. 
+Internet Connection
+Write permissions in the current working directory.
+
+Running
+-------
+
+To run McSIAB, first do 'python setup.py' in the terminal. You may need to run this as root if you do not have the required permissions to install python modules. After that has completed, do 'python McSIAB-Client.py'
+
+This is compatible only with python 2 for now, I am working on a python 3 version soon though.
 
 License
-=======
+-------
 
 McSIAB client is uses the MIT license, available in the LICENSE file attached with this program.
