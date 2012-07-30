@@ -152,6 +152,9 @@ def run_server(serverObjectToRun):
 	print "Server zip deleted. Running server."
 	runCommand = serverObjectToRun['run-command']
 	os.system(runCommand)
+	print "Server running completed. Cleaning up."
+	nukedir(serverObjectToRun['zip-name'].strip('.zip'))
+	print "Cleaned up."
 	return
 
 def download_zip(url, saveLocation):
@@ -167,6 +170,17 @@ def download_zip(url, saveLocation):
 		localFile.write(packet)
 	print str(saveLocation)+" Downloaded."
 	return
-		
+
+def nukedir(dir):
+	if dir[-1] == os.sep: dir = dir[:-1]
+	files = os.listdir(dir)
+	for file in files:
+		if file in ['.', '..']: continue
+		path = dir + os.sep + file
+		if os.path isdir(path):
+			nukedir(path)
+		else:
+			os.unlink(path)
+	os.rmdir(dir)		
 
 main()
