@@ -134,7 +134,14 @@ def run_server(serverObjectToRun):
 	download_zip(server_url+"/serverzips/"+serverObjectToRun['zip-name'], serverObjectToRun['zip-name'])
 	print "Extracting server zip."
 	serverZip = zipfile.ZipFile(serverObjectToRun['zip-name'])
-	serverZip.extractall()
+	for name in serverZip.namelist():
+		try:
+			f = open(name, 'wb')
+			f.write(serverZip.read(name))
+			f.close()
+			os.chmod(name, 0777)
+		except IOError:
+			serverZip.extract(name)
 	print "Server zip extracted. Deleting now..."
 	os.remove(serverObjectToRun['zip-name'])
 	print "Server zip deleted. Running server."
