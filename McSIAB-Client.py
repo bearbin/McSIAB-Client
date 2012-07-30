@@ -14,7 +14,10 @@ def main():
 	print "Welcome to McSIAB, the Minecraft Server In A Box app."
 	get_system_info()
 	print "setup.py must be run before using this program"
-	raw_input("Press enter to continue: ")
+	setupRan = raw_input("Has setup.py been run? (yes/no): ")
+	if setupRan != 'yes':
+		print "setup.py must have been run. Exiting."
+		return
 	main_menu()
 	print
 	print "Exiting"
@@ -27,7 +30,7 @@ def fetch_serverlist():
 	return parsedFile
 
 def main_menu():
-	while 1 == 1:
+	while 1:
 		print
 		print "(1) Choose a Server to Use"
 		print "(2) Load Test Page"
@@ -136,9 +139,7 @@ def run_server(serverObjectToRun):
 	serverZip = zipfile.ZipFile(serverObjectToRun['zip-name'])
 	for name in serverZip.namelist():
 		try:
-			f = open(name, 'wb')
-			f.write(serverZip.read(name))
-			f.close()
+			serverzip.extract(name)
 			os.chmod(name, 0777)
 		except IOError:
 			serverZip.extract(name)
