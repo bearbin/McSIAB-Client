@@ -79,6 +79,7 @@ def server_choice():
 				continue
 			if str(chosenServerInfo['processortype']) not in [currentprocessor, 'any']:
 				print "This server is not compatible with your processor, it requires the "+str(chosenServerInfo['processortype'])+" architecture."
+				continue
 			print "Information on server: "+serverOptionToUse
 			print "Server Name	: "+str(chosenServerInfo['name'])
 			print "Server Type	: "+str(chosenServerInfo['server-type'])
@@ -92,6 +93,9 @@ def server_choice():
 			if runServerDecision == 'yes':
 				print "Running Server."
 				run_server(chosenServerInfo)
+				print "Server running completed."
+				raw_input("Press enter to continue. ")
+				continue
 			else:
 				print "Returning to server list..."
 				continue
@@ -139,7 +143,7 @@ def run_server(serverObjectToRun):
 	serverZip = zipfile.ZipFile(serverObjectToRun['zip-name'])
 	for name in serverZip.namelist():
 		try:
-			serverzip.extract(name)
+			serverZip.extract(name)
 			os.chmod(name, 0777)
 		except IOError:
 			serverZip.extract(name)
@@ -148,6 +152,9 @@ def run_server(serverObjectToRun):
 	print "Server zip deleted. Running server."
 	runCommand = serverObjectToRun['run-command']
 	os.system(runCommand)
+	print "Server running completed. Cleaning up."
+	nukedir(serverObjectToRun['zip-name'].strip('.zip'))
+	print "Cleaned up."
 	return
 
 def download_zip(url, saveLocation):
@@ -163,6 +170,17 @@ def download_zip(url, saveLocation):
 		localFile.write(packet)
 	print str(saveLocation)+" Downloaded."
 	return
-		
+
+def nukedir(dir):
+	if dir[-1] == os.sep: dir = dir[:-1]
+	files = os.listdir(dir)
+	for file in files:
+		if file in ['.', '..']: continue
+		path = dir + os.sep + file
+		if os.path.isdir(path):
+			nukedir(path)
+		else:
+			os.unlink(path)
+	os.rmdir(dir)		
 
 main()
