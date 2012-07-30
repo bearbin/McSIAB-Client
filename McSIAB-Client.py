@@ -15,8 +15,8 @@ def main():
 	print "Welcome to McSIAB, the Minecraft Server In A Box app."
 	get_system_info()
 	print "setup.py must be run before using this program"
-	setupRan = raw_input("Has setup.py been run? (yes/no): ")
-	if setupRan != 'yes':
+	setupRan = ask_question(['yes', 'no'], "Has setup.py been run? (yes/no): ", "You must enter a yes or no answer.")
+	if setupRan == 'no':
 		print "setup.py must have been run. Exiting."
 		return
 	main_menu()
@@ -85,11 +85,7 @@ def server_choice():
 			print "Server Type	: "+str(chosenServerInfo['server-type'])
 			print "Requires Java	: "+str(chosenServerInfo['requires-java'])
 			print "User-Update?	: "+str(chosenServerInfo['user-update'])
-			runServerDecision = raw_input("Do you wish to run this server (yes/no): ")
-			if runServerDecision not in ['yes', 'no']:
-				print "Please use a valid yes or no. Please try again."
-				raw_input("Press enter to continue.")
-				continue
+			runServerDecision = ask_question(['yes', 'no'], "Do you wish to run this server (yes/no): ", "You must answer a yes or no answer.")
 			if runServerDecision == 'yes':
 				print "Running Server."
 				run_server(chosenServerInfo)
@@ -154,12 +150,8 @@ def run_server(serverObjectToRun):
 	os.system(runCommand)
 	print "Server running completed. Cleaning up."
 	while 1:
-		userChoiceServerCleanup = raw_input("Do you want to clean up (yes/no): ")
-		if userChoiceServerCleanup not in ['yes', 'no']:
-			print "You must use a valid yes/no. Please try again."
-			raw_input("Press enter to continue.")
-			continue
-		elif userChoiceServerCleanup == 'yes':
+		userChoiceServerCleanup = ask_question(['yes', 'no'], "Do you want to clean up (yes/no): ", "You must use a yes or no answer")
+		ifif userChoiceServerCleanup == 'yes':
 			print "Deleting server data..."
 			nukedir(serverObjectToRun['zip-name'].strip('.zip'))
 			print "Cleaned up."
