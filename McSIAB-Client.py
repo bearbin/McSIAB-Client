@@ -63,7 +63,6 @@ def server_choice():
 		for currentServer in serverListObject:
 			serverNumber += 1
 			print "("+str(serverNumber)+"): "+currentServer['name']
-			print currentServer
 		serverOptionToUse = raw_input("Please enter the server you wish to use: ")
 		try:
 			int(serverOptionToUse)
