@@ -143,7 +143,7 @@ def run_server(serverObjectToRun):
 	serverZip = zipfile.ZipFile(serverObjectToRun['zip-name'])
 	for name in serverZip.namelist():
 		try:
-			serverzip.extract(name)
+			serverZip.extract(name)
 			os.chmod(name, 0777)
 		except IOError:
 			serverZip.extract(name)
