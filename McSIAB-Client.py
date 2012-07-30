@@ -195,4 +195,15 @@ def nukedir(dir):
 			os.unlink(path)
 	os.rmdir(dir)		
 
+def ask_question(answers, questionText, errorText):
+	while 1:
+		userAnswerGiven = raw_input(questionText)
+		if userAnswerGiven not in answers:
+			print errorText
+			raw_input("Press enter to continue.")
+			continue
+		else:
+			return userAnswerGiven
+	return -1
+
 main()
