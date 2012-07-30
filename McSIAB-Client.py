@@ -34,25 +34,15 @@ def main_menu():
 	while 1:
 		print
 		print "(1) Choose a Server to Use"
-		print "(2) Load Test Page"
+		print "(2) Test Authentication"
 		print "(3) Exit"
-		print "(4) Test Auth"
-		option = raw_input("Choose an option: ")
-		try:
-			int(option)
-		except ValueError:
-			raw_input("Please use a valid integer. Press enter to try again.")
-			continue
+		option = ask_question(['1', '2', '3'], "Choose an option: ", "Please enter a value in the range of options.")
 		if option == "1":
 			server_choice()
 		elif option == "2":
-			test_page()
+			auth()
 		elif option == "3":
 			break
-		elif option == "4":
-			auth()
-		else:
-			print "Invalid option chosen. Please try again"
 	return
 
 def server_choice():
