@@ -15,7 +15,7 @@ def main():
 	get_system_info()
 	print "setup.py must be run before using this program"
 	setupRan = raw_input("Has setup.py been run? (yes/no): ")
-	if setupRan not 'yes':
+	if setupRan != 'yes':
 		print "setup.py must have been run. Exiting."
 		return
 	main_menu()
