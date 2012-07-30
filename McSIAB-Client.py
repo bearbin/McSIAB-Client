@@ -87,14 +87,6 @@ def server_choice():
 				continue
 	return
 			
-def test_page():
-	filehandle = urllib.urlopen("http://yaml.org")
-	int1 = 0
-	for i in filehandle.readlines():
-		int1 = int1 + 1
-		print "("+str(int1)+") "+i.rstrip()
-	print
-	return
 
 def auth():
 	print
