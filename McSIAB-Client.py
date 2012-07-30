@@ -6,6 +6,7 @@ import zipfile
 from sys import executable
 import yaml
 import platform
+import getpass
 
 server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
@@ -112,7 +113,7 @@ def test_page():
 def auth():
 	print
 	keyid = raw_input("Please enter your key id: ")
-	keypass = getpass("Please enter your password: ")
+	keypass = getpass.getpass("Please enter your password: ")
 	authhandle = urllib.urlopen(authserver+"/keyverify.php?keyid="+str(keyid)+"&keypass="+str(keypass))
 	i = authhandle.readline()
 	if i == "correct password":
