@@ -177,7 +177,7 @@ def nukedir(dir):
 	for file in files:
 		if file in ['.', '..']: continue
 		path = dir + os.sep + file
-		if os.path isdir(path):
+		if os.path.isdir(path):
 			nukedir(path)
 		else:
 			os.unlink(path)
