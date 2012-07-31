@@ -7,6 +7,7 @@ from sys import executable
 import yaml
 import platform
 import getpass
+import nukedir
 
 server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
@@ -15,8 +16,8 @@ def main():
 	print "Welcome to McSIAB, the Minecraft Server In A Box app."
 	get_system_info()
 	print "setup.py must be run before using this program"
-	setupRan = raw_input("Has setup.py been run? (yes/no): ")
-	if setupRan != 'yes':
+	setupRan = ask_question(['yes', 'no'], "Has setup.py been run? (yes/no): ", "You must enter a yes or no answer.")
+	if setupRan == 'no':
 		print "setup.py must have been run. Exiting."
 		return
 	main_menu()
@@ -34,25 +35,15 @@ def main_menu():
 	while 1:
 		print
 		print "(1) Choose a Server to Use"
-		print "(2) Load Test Page"
+		print "(2) Test Authentication"
 		print "(3) Exit"
-		print "(4) Test Auth"
-		option = raw_input("Choose an option: ")
-		try:
-			int(option)
-		except ValueError:
-			raw_input("Please use a valid integer. Press enter to try again.")
-			continue
+		option = ask_question(['1', '2', '3'], "Choose an option: ", "Please enter a value in the range of options.")
 		if option == "1":
 			server_choice()
 		elif option == "2":
-			test_page()
+			auth()
 		elif option == "3":
 			break
-		elif option == "4":
-			auth()
-		else:
-			print "Invalid option chosen. Please try again"
 	return
 
 def server_choice():
@@ -64,7 +55,7 @@ def server_choice():
 		for currentServer in serverListObject:
 			serverNumber += 1
 			print "("+str(serverNumber)+"): "+currentServer['name']
-		serverOptionToUse = raw_input("Please enter the server you wish to use: ")
+		serverOptionToUse = raw_input("Please enter the server you wish to use (or 0 to quit): ")
 		try:
 			int(serverOptionToUse)
 		except ValueError:
@@ -85,11 +76,7 @@ def server_choice():
 			print "Server Type	: "+str(chosenServerInfo['server-type'])
 			print "Requires Java	: "+str(chosenServerInfo['requires-java'])
 			print "User-Update?	: "+str(chosenServerInfo['user-update'])
-			runServerDecision = raw_input("Do you wish to run this server (yes/no): ")
-			if runServerDecision not in ['yes', 'no']:
-				print "Please use a valid yes or no. Please try again."
-				raw_input("Press enter to continue.")
-				continue
+			runServerDecision = ask_question(['yes', 'no'], "Do you wish to run this server (yes/no): ", "You must answer a yes or no answer.")
 			if runServerDecision == 'yes':
 				print "Running Server."
 				run_server(chosenServerInfo)
@@ -99,16 +86,15 @@ def server_choice():
 			else:
 				print "Returning to server list..."
 				continue
+		elif adjustedServerOption == -1:
+			print "Exiting from server list."
+			break
+		else:
+			print "Please enter a value within the range."
+			raw_input("Press enter to continue.")
+			continue
 	return
 			
-def test_page():
-	filehandle = urllib.urlopen("http://yaml.org")
-	int1 = 0
-	for i in filehandle.readlines():
-		int1 = int1 + 1
-		print "("+str(int1)+") "+i.rstrip()
-	print
-	return
 
 def auth():
 	print
@@ -154,14 +140,10 @@ def run_server(serverObjectToRun):
 	os.system(runCommand)
 	print "Server running completed. Cleaning up."
 	while 1:
-		userChoiceServerCleanup = raw_input("Do you want to clean up (yes/no): ")
-		if userChoiceServerCleanup not in ['yes', 'no']:
-			print "You must use a valid yes/no. Please try again."
-			raw_input("Press enter to continue.")
-			continue
-		elif userChoiceServerCleanup == 'yes':
+		userChoiceServerCleanup = ask_question(['yes', 'no'], "Do you want to clean up (yes/no): ", "You must use a yes or no answer")
+		if userChoiceServerCleanup == 'yes':
 			print "Deleting server data..."
-			nukedir(serverObjectToRun['zip-name'].strip('.zip'))
+			nukedir.nukedir(serverObjectToRun['zip-name'].strip('.zip'))
 			print "Cleaned up."
 			break
 		else:
@@ -183,16 +165,15 @@ def download_zip(url, saveLocation):
 	print str(saveLocation)+" Downloaded."
 	return
 
-def nukedir(dir):
-	if dir[-1] == os.sep: dir = dir[:-1]
-	files = os.listdir(dir)
-	for file in files:
-		if file in ['.', '..']: continue
-		path = dir + os.sep + file
-		if os.path.isdir(path):
-			nukedir(path)
+def ask_question(answers, questionText, errorText):
+	while 1:
+		userAnswerGiven = raw_input(questionText)
+		if userAnswerGiven not in answers:
+			print errorText
+			raw_input("Press enter to continue.")
+			continue
 		else:
-			os.unlink(path)
-	os.rmdir(dir)		
+			return userAnswerGiven
+	return -1
 
 main()
