@@ -134,7 +134,7 @@ def run_server(serverObjectToRun):
 	print "Server running completed. Cleaning up."
 	while 1:
 		userChoiceServerCleanup = ask_question(['yes', 'no'], "Do you want to clean up (yes/no): ", "You must use a yes or no answer")
-		ifif userChoiceServerCleanup == 'yes':
+		if userChoiceServerCleanup == 'yes':
 			print "Deleting server data..."
 			nukedir.nukedir(serverObjectToRun['zip-name'].strip('.zip'))
 			print "Cleaned up."
