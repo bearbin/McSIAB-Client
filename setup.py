@@ -4,7 +4,7 @@ import os
 import urllib
 import sys
 import zipfile
-import shared/nukedir
+import nukedir
 
 def main():
 	print "Root required to run script - make sure to use."
@@ -34,7 +34,7 @@ def install_yaml():
 	print "Installed"
 	print "Cleaning Up"
 	print "Deleting Directories"
-	nukedir("PyYAML-3.10")
+	nukedir.nukedir("PyYAML-3.10")
 	print "Deleting ZipFile"
 	yamlzip.close()
 	os.remove("PyYAML.zip")
