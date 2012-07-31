@@ -55,7 +55,7 @@ def server_choice():
 		for currentServer in serverListObject:
 			serverNumber += 1
 			print "("+str(serverNumber)+"): "+currentServer['name']
-		serverOptionToUse = raw_input("Please enter the server you wish to use: ")
+		serverOptionToUse = raw_input("Please enter the server you wish to use (or 0 to quit): ")
 		try:
 			int(serverOptionToUse)
 		except ValueError:
@@ -86,6 +86,13 @@ def server_choice():
 			else:
 				print "Returning to server list..."
 				continue
+		elif adjustedServerOption == -1:
+			print "Exiting from server list."
+			break
+		else:
+			print "Please enter a value within the range."
+			raw_input("Press enter to continue.")
+			continue
 	return
 			
 
