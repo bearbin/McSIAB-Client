@@ -7,6 +7,7 @@ from sys import executable
 import yaml
 import platform
 import getpass
+import nukedir
 
 server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
@@ -135,7 +136,7 @@ def run_server(serverObjectToRun):
 		userChoiceServerCleanup = ask_question(['yes', 'no'], "Do you want to clean up (yes/no): ", "You must use a yes or no answer")
 		ifif userChoiceServerCleanup == 'yes':
 			print "Deleting server data..."
-			nukedir(serverObjectToRun['zip-name'].strip('.zip'))
+			nukedir.nukedir(serverObjectToRun['zip-name'].strip('.zip'))
 			print "Cleaned up."
 			break
 		else:
@@ -156,18 +157,6 @@ def download_zip(url, saveLocation):
 		localFile.write(packet)
 	print str(saveLocation)+" Downloaded."
 	return
-
-def nukedir(dir):
-	if dir[-1] == os.sep: dir = dir[:-1]
-	files = os.listdir(dir)
-	for file in files:
-		if file in ['.', '..']: continue
-		path = dir + os.sep + file
-		if os.path.isdir(path):
-			nukedir(path)
-		else:
-			os.unlink(path)
-	os.rmdir(dir)		
 
 def ask_question(answers, questionText, errorText):
 	while 1:
