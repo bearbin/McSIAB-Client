@@ -65,8 +65,8 @@ def ask_question(questionText, answerTypeAllowed = 0, allowedAnswers = None, acc
 					raw_input("Press enter to continue. ")
 					continue
 			elif answerTypeAllowed == 4:
-				if lower(str(userInput)) in ['y', 'n', 'yes', 'no', '0', '1', 'true', 'false']:
-					if lower(str(userInput)) in ['y', 'yes', '1', 'true']:
+				if str(userInput).lower() in ['y', 'n', 'yes', 'no', '0', '1', 'true', 'false']:
+					if str(userInput).lower() in ['y', 'yes', '1', 'true']:
 						print acceptedAnswerText
 						return True
 					else:
@@ -106,8 +106,8 @@ def ask_question(questionText, answerTypeAllowed = 0, allowedAnswers = None, acc
 				print acceptedAnswerText
 				return float(userInput)
 			elif answerTypeAllowed == 4:
-				if lower(str(userInput)) in ['y', 'n', 'yes', 'no', '0', '1', 'true', 'false']:
-					if lower(str(userInput)) in ['y', 'yes', '1', 'true']:
+				if str(userInput).lower() in ['y', 'n', 'yes', 'no', '0', '1', 'true', 'false']:
+					if str(userInput).lower() in ['y', 'yes', '1', 'true']:
 						print acceptedAnswerText
 						return True
 					else:
