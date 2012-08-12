@@ -18,7 +18,7 @@ def main():
 	get_system_info()
 	print "setup.py must be run before using this program"
 	setupRan = askquestion.ask_question("Has setup.py been run? (yes/no): ", 4, badAnswerText = "Please enter a yes or no answer. ")
-	if setupRan == 'no':
+	if setupRan == False:
 		print "setup.py must have been run. Exiting."
 		return
 	main_menu()
@@ -38,12 +38,12 @@ def main_menu():
 		print "(1) Choose a Server to Use"
 		print "(2) Test Authentication"
 		print "(3) Exit"
-		option = ask_question(['1', '2', '3'], "Choose an option: ", "Please enter a value in the range of options.")
-		if option == "1":
+		option = askquestion.ask_question("Choose an option: ", 2, [1, 2, 3])
+		if option == 1:
 			server_choice()
-		elif option == "2":
+		elif option == 2:
 			auth()
-		elif option == "3":
+		elif option == 3:
 			break
 	return
 
@@ -56,43 +56,33 @@ def server_choice():
 		for currentServer in serverListObject:
 			serverNumber += 1
 			print "("+str(serverNumber)+"): "+currentServer['name']
-		serverOptionToUse = raw_input("Please enter the server you wish to use (or 0 to quit): ")
-		try:
-			int(serverOptionToUse)
-		except ValueError:
-			raw_input("Please enter a valid integer. Press enter to try again.")
-			continue
-		adjustedServerOption = int(serverOptionToUse) -1
-		if adjustedServerOption < len(serverListObject) and adjustedServerOption > -1:
-			chosenServerInfo = serverListObject[adjustedServerOption]
-			if str(chosenServerInfo['os']) not in [currentos, 'any']:
-				print "This server is not compatible with your OS, it requires: "+str(chosenServerInfo['os'])
-				raw_input("Press enter to continue.")
-				continue
-			if str(chosenServerInfo['processortype']) not in [currentprocessor, 'any']:
-				print "This server is not compatible with your processor, it requires the "+str(chosenServerInfo['processortype'])+" architecture."
-				continue
-			print "Information on server: "+serverOptionToUse
-			print "Server Name	: "+str(chosenServerInfo['name'])
-			print "Server Type	: "+str(chosenServerInfo['server-type'])
-			print "Requires Java	: "+str(chosenServerInfo['requires-java'])
-			print "User-Update?	: "+str(chosenServerInfo['user-update'])
-			runServerDecision = ask_question(['yes', 'no'], "Do you wish to run this server (yes/no): ", "You must answer a yes or no answer.")
-			if runServerDecision == 'yes':
-				print "Running Server."
-				run_server(chosenServerInfo)
-				print "Server running completed."
-				raw_input("Press enter to continue. ")
-				continue
-			else:
-				print "Returning to server list..."
-				continue
-		elif adjustedServerOption == -1:
-			print "Exiting from server list."
+		serverOptionToUse = askquestion.ask_question("Please enter the server you wish to use (or 0 to quit): ", 2, range(len(serverListObject)+1))
+		adjustedServerOption = serverOptionToUse -1
+		if adjustedServerOption == -1:
+			print "Returning to main menu..."
 			break
-		else:
-			print "Please enter a value within the range."
+		chosenServerInfo = serverListObject[adjustedServerOption]
+		if str(chosenServerInfo['os']) not in [currentos, 'any']:
+			print "This server is not compatible with your OS, it requires: "+str(chosenServerInfo['os'])
 			raw_input("Press enter to continue.")
+			continue
+		if str(chosenServerInfo['processortype']) not in [currentprocessor, 'any']:
+			print "This server is not compatible with your processor, it requires the "+str(chosenServerInfo['processortype'])+" architecture."
+			continue
+		print "Information on server: "+str(serverOptionToUse)
+		print "Server Name	: "+str(chosenServerInfo['name'])
+		print "Server Type	: "+str(chosenServerInfo['server-type'])
+		print "Requires Java	: "+str(chosenServerInfo['requires-java'])
+		print "User-Update?	: "+str(chosenServerInfo['user-update'])
+		runServerDecision = askquestion.ask_question("Do you wish to run this server (yes/no): ", 4)
+		if runServerDecision == True:
+			print "Running Server."
+			run_server(chosenServerInfo)
+			print "Server running completed."
+			raw_input("Press enter to continue. ")
+			continue
+		else:
+			print "Returning to server list..."
 			continue
 	return
 			
@@ -141,8 +131,8 @@ def run_server(serverObjectToRun):
 	os.system(runCommand)
 	print "Server running completed. Cleaning up."
 	while 1:
-		userChoiceServerCleanup = ask_question(['yes', 'no'], "Do you want to clean up (yes/no): ", "You must use a yes or no answer")
-		if userChoiceServerCleanup == 'yes':
+		userChoiceServerCleanup = askquestion.ask_question("Do you want to clean up (yes/no): ", 4)
+		if userChoiceServerCleanup == True:
 			print "Deleting server data..."
 			nukedir.nukedir(serverObjectToRun['zip-name'].strip('.zip'))
 			print "Cleaned up."
