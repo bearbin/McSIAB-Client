@@ -8,6 +8,7 @@ import yaml
 import platform
 import getpass
 import nukedir
+import askquestion
 
 server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
@@ -16,7 +17,7 @@ def main():
 	print "Welcome to McSIAB, the Minecraft Server In A Box app."
 	get_system_info()
 	print "setup.py must be run before using this program"
-	setupRan = ask_question(['yes', 'no'], "Has setup.py been run? (yes/no): ", "You must enter a yes or no answer.")
+	setupRan = askquestion.ask_question("Has setup.py been run? (yes/no): ", 4, badAnswerText = "Please enter a yes or no answer. ")
 	if setupRan == 'no':
 		print "setup.py must have been run. Exiting."
 		return
