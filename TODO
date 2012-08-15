@@ -2,9 +2,6 @@ This is a list of all the planned things to do:
 
 
 (Short Term)
-Implement server choosing.
-Server dowloading/unzipping.
-Running server correctly.
 Rezipping.
 Uploading (More server side)
 Make ready for release!
@@ -14,7 +11,8 @@ Make ready for release!
 Reading of various values from config file.
 Cleaning up code.
 Make python 3 version.
+Localisation? 
+Command-line version?
 
 (General ideas for the future)
 GUI
-License.
