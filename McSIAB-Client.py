@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
-import os
+# import os
 import urllib
 import zipfile
 from sys import executable
-import yaml
 import platform
 import getpass
-import nukedir
+# import nukedir
 import askquestion
+import serverchoice
 
 server_url = "http://bearpi.no-ip.org"
 authserver = "http://www.berboe.co.uk"
@@ -26,11 +26,13 @@ def main():
 	print "Exiting"
 	return
 
+"""
 def fetch_serverlist():
 	yamlFileOnServer = urllib.urlopen(server_url+"/serverzips/list.yml")
 	parsedFile = yaml.load(yamlFileOnServer)
 	yamlFileOnServer.close()
 	return parsedFile
+"""
 
 def main_menu():
 	while 1:
@@ -40,13 +42,14 @@ def main_menu():
 		print "(3) Exit"
 		option = askquestion.ask_question("Choose an option: ", 2, [1, 2, 3])
 		if option == 1:
-			server_choice()
+			serverchoice.server_choice({'currentos':currentos, 'currentprocessor':currentprocessor}, server_url)
 		elif option == 2:
 			auth()
 		elif option == 3:
 			break
 	return
 
+"""
 def server_choice():
 	print "This feature is under development. It does not do its final procedure yet."
 	print
@@ -85,7 +88,7 @@ def server_choice():
 			print "Returning to server list..."
 			continue
 	return
-			
+"""		
 
 def auth():
 	print
@@ -113,6 +116,7 @@ def get_system_info():
 	print "System info collected."
 	return
 
+"""
 def run_server(serverObjectToRun):
 	print "Downloading server zip."
 	download_zip(server_url+"/serverzips/"+serverObjectToRun['zip-name'], serverObjectToRun['zip-name'])
@@ -141,7 +145,9 @@ def run_server(serverObjectToRun):
 			print "Server data not deleted. Returning to server list."
 			break
 	return
+"""
 
+"""
 def download_zip(url, saveLocation):
 	print "Zip Download Started."
 	zipToDownload = urllib.urlopen(url)
@@ -155,5 +161,6 @@ def download_zip(url, saveLocation):
 		localFile.write(packet)
 	print str(saveLocation)+" Downloaded."
 	return
+"""
 
 main()
