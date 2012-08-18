@@ -3,8 +3,14 @@ import fetchserverlist
 import runserver
 
 def server_choice(platformInfo, serverURL):
-    print "This feature is under development. It does not do its final procedure yet."
-    print
+
+    #
+    # Asks the user if they want to run a server, and what type.
+    #
+    # platformInfo : A dictionary containing the processor type and OS.
+    # serverURL    : The URL of the server with the server list and server zips on it.
+    #
+
     serverListObject = fetchserverlist.fetch_serverlist(serverURL)
     while 1 == 1:
         serverNumber = 0
@@ -32,6 +38,7 @@ def server_choice(platformInfo, serverURL):
         runServerDecision = askquestion.ask_question("Do you wish to run this server (yes/no): ", 4)
         if runServerDecision == True:
             print "Running Server."
+            # Runs the server, and cleans up if necessary.
             runserver.run_server(chosenServerInfo, serverURL)
             print "Server running completed."
             raw_input("Press enter to continue. ")
