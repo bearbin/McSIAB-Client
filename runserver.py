@@ -11,6 +11,7 @@ def run_server(serverObjectToRun, serverURL):
     #
     # serverObjectToRun : A python object consisting of information about the server to run.
     # serverURL         : The URL of the server containing the server zip.
+    #
 
     print "Downloading server zip."
     downloadzip.download_zip(serverURL+"/serverzips/"+serverObjectToRun['zip-name'], serverObjectToRun['zip-name'])
@@ -29,6 +30,7 @@ def run_server(serverObjectToRun, serverURL):
     os.remove(serverObjectToRun['zip-name'])
     print "Server zip deleted. Running server."
     runCommand = serverObjectToRun['run-command']
+    # TODO: Improve this, currently the system allowes for an arbitrary command run on the user's computer. (Also not good for portability.)
     os.system(runCommand)
     print "Server running completed. Cleaning up."
     while 1:
