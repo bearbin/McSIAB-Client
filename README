@@ -19,3 +19,12 @@ License
 -------
 
 McSIAB client is uses the MIT license, available in the LICENSE file attached with this program.
+
+Bugs, Questions and Contributing
+--------------------------------
+
+If you find a bug, or want to ask me a question, just put an issue on the tracker at https://github.com/bearbin/McSIAB-Client/issues/
+
+If you want to contribute some code, just fork this and send me a pull request on GitHub.
+
+(If you don't want to use GitHub for issues, contact me with bearbin@gmail.com)
