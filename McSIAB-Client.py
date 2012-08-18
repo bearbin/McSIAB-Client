@@ -29,14 +29,6 @@ def main():
     print "Exiting"
     return
 
-"""
-def fetch_serverlist():
-    yamlFileOnServer = urllib.urlopen(server_url+"/serverzips/list.yml")
-    parsedFile = yaml.load(yamlFileOnServer)
-    yamlFileOnServer.close()
-    return parsedFile
-"""
-
 def main_menu():
     while 1:
         print
@@ -53,45 +45,6 @@ def main_menu():
         elif option == 3:
             break
     return
-
-"""
-def server_choice():
-    serverListObject = fetch_serverlist()
-    while 1 == 1:
-        serverNumber = 0
-        for currentServer in serverListObject:
-            serverNumber += 1
-            print "("+str(serverNumber)+"): "+currentServer['name']
-        serverOptionToUse = askquestion.ask_question("Please enter the server you wish to use (or 0 to quit): ", 2, range(len(serverListObject)+1))
-        adjustedServerOption = serverOptionToUse -1
-        if adjustedServerOption == -1:
-            print "Returning to main menu..."
-            break
-        chosenServerInfo = serverListObject[adjustedServerOption]
-        if str(chosenServerInfo['os']) not in [currentos, 'any']:
-            print "This server is not compatible with your OS, it requires: "+str(chosenServerInfo['os'])
-            raw_input("Press enter to continue.")
-            continue
-        if str(chosenServerInfo['processortype']) not in [currentprocessor, 'any']:
-            print "This server is not compatible with your processor, it requires the "+str(chosenServerInfo['processortype'])+" architecture."
-            continue
-        print "Information on server: "+str(serverOptionToUse)
-        print "Server Name	: "+str(chosenServerInfo['name'])
-        print "Server Type	: "+str(chosenServerInfo['server-type'])
-        print "Requires Java	: "+str(chosenServerInfo['requires-java'])
-        print "User-Update?	: "+str(chosenServerInfo['user-update'])
-        runServerDecision = askquestion.ask_question("Do you wish to run this server (yes/no): ", 4)
-        if runServerDecision == True:
-            print "Running Server."
-            run_server(chosenServerInfo)
-            print "Server running completed."
-            raw_input("Press enter to continue. ")
-            continue
-        else:
-            print "Returning to server list..."
-            continue
-    return
-"""		
 
 def auth():
     print
@@ -122,52 +75,5 @@ def get_system_info():
     print "Processsor type is: "+currentprocessor
     print "System info collected."
     return
-
-"""
-def run_server(serverObjectToRun):
-    print "Downloading server zip."
-    download_zip(server_url+"/serverzips/"+serverObjectToRun['zip-name'], serverObjectToRun['zip-name'])
-    print "Extracting server zip."
-    serverZip = zipfile.ZipFile(serverObjectToRun['zip-name'])
-    for name in serverZip.namelist():
-        try:
-            serverZip.extract(name)
-            os.chmod(name, 0777)
-        except IOError:
-            serverZip.extract(name)
-    print "Server zip extracted. Deleting now..."
-    os.remove(serverObjectToRun['zip-name'])
-    print "Server zip deleted. Running server."
-    runCommand = serverObjectToRun['run-command']
-    os.system(runCommand)
-    print "Server running completed. Cleaning up."
-    while 1:
-        userChoiceServerCleanup = askquestion.ask_question("Do you want to clean up (yes/no): ", 4)
-        if userChoiceServerCleanup == True:
-            print "Deleting server data..."
-            nukedir.nukedir(serverObjectToRun['zip-name'].strip('.zip'))
-            print "Cleaned up."
-            break
-        else:
-            print "Server data not deleted. Returning to server list."
-            break
-    return
-"""
-
-"""
-def download_zip(url, saveLocation):
-    print "Zip Download Started."
-    zipToDownload = urllib.urlopen(url)
-    localFile = open(saveLocation, 'wb')
-    print "Downloading..."
-    while 1:
-        packet = zipToDownload.read()
-        print "Downloading..."
-        if not packet:
-            break
-        localFile.write(packet)
-    print str(saveLocation)+" Downloaded."
-    return
-"""
 
 main()
