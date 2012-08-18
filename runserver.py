@@ -5,6 +5,13 @@ import downloadzip
 import nukedir
 
 def run_server(serverObjectToRun, serverURL):
+    
+    #
+    # Downloads a minecraft server, runs it; and optionally cleans up at the end.
+    #
+    # serverObjectToRun : A python object consisting of information about the server to run.
+    # serverURL         : The URL of the server containing the server zip.
+
     print "Downloading server zip."
     downloadzip.download_zip(serverURL+"/serverzips/"+serverObjectToRun['zip-name'], serverObjectToRun['zip-name'])
     print "Extracting server zip."
