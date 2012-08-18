@@ -11,9 +11,12 @@ def run_server(serverObjectToRun, serverURL):
     serverZip = zipfile.ZipFile(serverObjectToRun['zip-name'])
     for name in serverZip.namelist():
         try:
+            # Extract file from server.
             serverZip.extract(name)
+            # Try and chmod the file to be WRX for everybody. (If file is a directory, this will fail)
             os.chmod(name, 0777)
         except IOError:
+            # Bit of code that might not be needed, but I'm not removing it because it might be important.
             serverZip.extract(name)
     print "Server zip extracted. Deleting now..."
     os.remove(serverObjectToRun['zip-name'])
@@ -25,6 +28,7 @@ def run_server(serverObjectToRun, serverURL):
         userChoiceServerCleanup = askquestion.ask_question("Do you want to clean up (yes/no): ", 4)
         if userChoiceServerCleanup == True:
             print "Deleting server data..."
+            # Deletes server directory and files inside.
             nukedir.nukedir(serverObjectToRun['zip-name'].strip('.zip'))
             print "Cleaned up."
             break
