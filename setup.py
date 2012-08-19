@@ -11,6 +11,8 @@ def main():
     raw_input("Press enter to confirm continuing.")
     print "Installing PyYAML"
     install_yaml()
+    print "Installing requests."
+    install_requests()
     return
 
 def install_yaml():
@@ -39,9 +41,34 @@ def install_yaml():
     yamlzip.close()
     os.remove("PyYAML.zip")
     print "Cleaned Up!"
-    import yaml
     return
 
-
+def install_requests():
+    requests_url = urllib.urlopen("http://pi.berboe.co.uk/files/requests.zip")
+    localFile = open("requests.zip", "wb")
+    print "Downloading ZipFile"
+    while 1:
+        packet = requests_url.read()
+        print "Downloading..."
+        if not packet:
+            break
+        localFile.write(packet)
+    print "Downloaded."
+    localFile.close()
+    requests_url.close()
+    requestszip = zipfile.ZipFile("PyYAML.zip")
+    print "Extracting requests.zip"
+    requestszip.extractall()
+    print "Installing"
+    os.system("cd requests && "+sys.executable+" setup.py install")
+    print "Installed"
+    print "Cleaning Up"
+    print "Deleting Directories"
+    nukedir.nukedir("requests")
+    print "Deleting ZipFile"
+    requestszip.close()
+    os.remove("requests.zip")
+    print "Cleaned Up!"
+    return
 
 main()
