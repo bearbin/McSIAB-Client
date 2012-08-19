@@ -1,12 +1,18 @@
 #!/usr/bin/python
 
-# import os
+# Check if all the dependencies have been installed.
+try:
+    import yaml
+except:
+    print "Please make sure all the dependencies have been installed. Using setup.py might help."
+    exit()
+
+# Main imports.
 import urllib
 import zipfile
 from sys import executable
 import platform
 import getpass
-# import nukedir
 import askquestion
 import serverchoice
 
@@ -18,11 +24,6 @@ def main():
     # Sets processor type and OS to globals 'currentos' and 'currentprocessor'
     get_system_info()
     print "setup.py must be run before using this program"
-    # Asks if setup.py has been run.
-    setupRan = askquestion.ask_question("Has setup.py been run? (yes/no): ", 4, badAnswerText = "Please enter a yes or no answer. ")
-    if setupRan == False:
-        print "setup.py must have been run. Exiting."
-        return
     # Load the main menu, gateway to all the functions.
     main_menu()
     print
