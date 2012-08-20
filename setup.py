@@ -56,7 +56,7 @@ def install_requests():
     print "Downloaded."
     localFile.close()
     requests_url.close()
-    requestszip = zipfile.ZipFile("PyYAML.zip")
+    requestszip = zipfile.ZipFile("requests.zip")
     print "Extracting requests.zip"
     requestszip.extractall()
     print "Installing"
