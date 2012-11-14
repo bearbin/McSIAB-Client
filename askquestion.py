@@ -13,10 +13,20 @@ def ask_question(questionText, answerTypeAllowed = 0, allowedAnswers = None, acc
     # 2 : Integer
     # 3 : Float
     # 4 : Boolean 
-    
+
+    # TODO: Simplify more.
+
+    def badAnswer():
+        print badAnswerText
+        raw_input("Press enter to continue. ")
+
     if answerTypeAllowed not in range(5):
         print "There was an error with internal coding :("
+        print "Please tell the maintainer this error:"
+        print "answerTypeAllowed out of bounds when ask_question function called."
+        print "answerTypeAllowed was "+str(answerTypeAllowed)+" when allowed values are 0-4."
         return
+
     while 1:
         userInput = raw_input(questionText)
         if allowedAnswers is not None:		
@@ -25,16 +35,14 @@ def ask_question(questionText, answerTypeAllowed = 0, allowedAnswers = None, acc
                     print acceptedAnswerText
                     return userInput
                 else:
-                    print badAnswerText
-                    raw_input("Press enter to continue. ")
+                    badAnswer()
                     continue
             elif answerTypeAllowed == 1:
                 if str(userInput) in allowedAnswers:
                     print acceptedAnswerText
                     return str(userInput)
                 else:
-                    print badAnswerText
-                    raw_input("Press enter to continue. ")
+                    badAnswer()
                     continue
             elif answerTypeAllowed == 2:
                 try:
@@ -47,8 +55,7 @@ def ask_question(questionText, answerTypeAllowed = 0, allowedAnswers = None, acc
                     print acceptedAnswerText
                     return int(userInput)
                 else:
-                    print badAnswerText
-                    raw_input("Press enter to continue. ")
+                    badAnswer()
                     continue
             elif answerTypeAllowed == 3:
                 try:
@@ -61,8 +68,7 @@ def ask_question(questionText, answerTypeAllowed = 0, allowedAnswers = None, acc
                     print acceptedAnswerText
                     return float(userInput)
                 else:
-                    print badAnswerText
-                    raw_input("Press enter to continue. ")
+                    badAnswer()
                     continue
             elif answerTypeAllowed == 4:
                 if str(userInput).lower() in ['y', 'n', 'yes', 'no', '0', '1', 'true', 'false']:
